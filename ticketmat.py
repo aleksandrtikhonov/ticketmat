@@ -7,9 +7,10 @@ from typing import List
 import requests
 
 from aaaaaaaaaaaaa import get_random_from_go
+import httpx
 
 COOKIES = {
-    "session": "MTcxMzUzNzYxNnxEWDhFQVFMX2dBQUJFQUVRQUFBaF80QUFBUVp6ZEhKcGJtY01DUUFIZFhObGNsOXBaQVIxYVc1MEJnUUFfZ3E1fHILRZzycWXnmZzSEeFAoT5AIFO7ERUhmb5ySsadl7d8"  # noqa
+    "session": "MTcxMzU3NDA3NnxEWDhFQVFMX2dBQUJFQUVRQUFBaF80QUFBUVp6ZEhKcGJtY01DUUFIZFhObGNsOXBaQVIxYVc1MEJnUUFfZ3RUfMweL2-PDi5UTLqrfLmsD4XlnwD7TB0C6NXpwnSZUDvN"  # noqa
 }
 DOMAIN = "https://t-luckyticket-w8mg6qr0.spbctf.ru"
 
@@ -55,7 +56,8 @@ class Ticketmat:
 
     def buy_ticket(self, should_buy) -> None:
         request_time = datetime.now()
-        response = requests.post(self._buy_url, cookies=self._cookies)
+        #response = requests.post(self._buy_url, cookies=self._cookies)
+        response = httpx.post(self._buy_url, cookies=self._cookies)
         incoming_ticket_number = response.json()["number"]
         server_ticket_time = search_server_ticket_time(
             request_time, incoming_ticket_number
